@@ -11,7 +11,7 @@ export const AuthContextProvider = ({children}) => {
         //degisstiginde
 
         setTimeout(() => {
-            setIsAuthenticated(true)
+            setIsAuthenticated(false)
         }, 3000);
 
     },[])
