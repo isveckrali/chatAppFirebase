@@ -10,10 +10,12 @@ import { TouchableOpacity } from 'react-native'
 import { useRouter } from 'expo-router'
 import Loading from '../components/Loading'
 import CustomKeyboardView from '../components/CustomKeyboardView'
+import { useAuth } from '../context/authContext'
 
 const SignUp = () => {
 
   const router = useRouter()
+  const {register} = useAuth()
 
   const emailRef = useRef("")
   const passwordRef = useRef("")
@@ -27,6 +29,16 @@ const SignUp = () => {
       Alert.alert('Kayit', "Lutfen tum alanlari doldurunuz")
       return
     }
+    setLoading(true)
+
+    let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current)
+    setLoading(false)
+
+    console.log("got result: ", response)
+    if (!response?.success) {
+      Alert.alert("Kayit ", response.msg)
+    }
+
   }
 
   return (

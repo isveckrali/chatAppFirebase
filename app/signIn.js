@@ -9,19 +9,29 @@ import { Octicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { useRouter } from 'expo-router'
 import Loading from '../components/Loading'
+import { useAuth } from '../context/authContext'
 
 const Signin = () => {
 
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const {login} = useAuth()
+
   const emailRef = useRef("")
   const passwordRef = useRef("")
 
-  const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert('Giris', "Lutfen tum alanlari doldurunuz")
       return
+    }
+
+    setLoading(true)
+    const response = await login(emailRef.current, passwordRef.current)
+    setLoading(false)
+    if (!response.success) {
+      Alert.alert("Sign In", response.msg)
     }
   }
 
