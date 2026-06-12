@@ -9,7 +9,7 @@ const home = () => {
   }
   console.log("user data ", user)
   return (
-    <View>
+    <View className="flex-1 bg-white">
       <Text>home</Text>
       <Pressable onPress={handleLogout}>
         <Text>Sign Out</Text>
