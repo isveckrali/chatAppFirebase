@@ -54,7 +54,6 @@ const HomeHeader = () => {
                         />
                     </MenuTrigger>
 
-
                     <MenuOptions
                         customStyles={{
                             optionsContainer: {
